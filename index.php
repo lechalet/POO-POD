@@ -9,7 +9,6 @@ if (isset($_POST['valide']))
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']);
     $query = "INSERT INTO friend (firstname, lastname) VALUES ('" . $firstname . "', '" . $lastname . "')";
-    echo $query;
     $pdo->exec($query);
 }
 
@@ -17,14 +16,23 @@ if (isset($_POST['valide']))
 $query = "SELECT * FROM friend";
 $statement = $pdo->query($query);
 $friends = $statement->fetchAll();
-$statement->bindValue(':lastname', $lastName, \PDO::PARAM_STR);
-$statement->bindValue(':firstname', $firstName, \PDO::PARAM_STR);
+
+// Impression en html 
+
+foreach ($friends AS $friend) 
+{
+    echo '<p>';
+    echo $friend['firstname'] . ' ' . $friend['lastname'];
+    echo '</p>';
+}
+
+// Security
+$statement->bindValue(':firstname', '$firstname', \PDO::PARAM_STR);
+$statement->bindValue(':lastname', '$lastname', \PDO::PARAM_STR);
 
 // Redirection 
-header('Location:succes.php');
 
-// Test 
-// var_dump($friends);
+
 ?>
 
 <!DOCTYPE html>
