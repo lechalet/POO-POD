@@ -17,6 +17,8 @@ if (isset($_POST['valide']))
 $query = "SELECT * FROM friend";
 $statement = $pdo->query($query);
 $friends = $statement->fetchAll();
+$statement->bindValue(':lastname', $lastName, \PDO::PARAM_STR);
+$statement->bindValue(':firstname', $firstName, \PDO::PARAM_STR);
 
 // Redirection 
 header('Location:succes.php');
