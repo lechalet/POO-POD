@@ -18,13 +18,14 @@ $statement = $pdo->query($query);
 $friends = $statement->fetchAll();
 
 // Impression en html 
-
+echo "<ul>";
 foreach ($friends AS $friend) 
 {
-    echo '<p>';
+    echo '<li>';
     echo $friend['firstname'] . ' ' . $friend['lastname'];
-    echo '</p>';
+    echo '</li>';
 }
+echo "</ul>";
 
 // Security
 $statement->bindValue(':firstname', '$firstname', \PDO::PARAM_STR);
